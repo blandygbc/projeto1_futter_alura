@@ -30,30 +30,30 @@ class _TaskViewState extends State<TaskView> {
           opacity: opacity ? 1.0 : 0.0,
           duration: const Duration(milliseconds: 100),
           child: ListView(
-            children: const [
+            children: [
               Task(
                 name: 'Aprender Flutter',
-                dificuldade: 4,
+                difficulty: 4,
                 image: 'assets/images/dash.png',
               ),
               Task(
                 name: 'Andar de Bike',
-                dificuldade: 2,
+                difficulty: 1,
                 image: 'assets/images/bike.webp',
               ),
               Task(
                 name: 'Meditar',
-                dificuldade: 5,
+                difficulty: 5,
                 image: 'assets/images/meditar.jpeg',
               ),
               Task(
                 name: 'Ler',
-                dificuldade: 5,
+                difficulty: 5,
                 image: 'assets/images/livro.jpg',
               ),
               Task(
                 name: 'Jogar',
-                dificuldade: 2,
+                difficulty: 0,
                 image: 'assets/images/jogar.jpg',
               ),
               SizedBox(height: 80),

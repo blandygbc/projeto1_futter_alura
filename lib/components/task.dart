@@ -4,13 +4,22 @@ import 'package:projeto1_futter_alura/components/difficulty.dart';
 class Task extends StatefulWidget {
   final String name;
   final String image;
-  final int dificuldade;
+  final int difficulty;
+  final List<Color> levelColors = [
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.orange,
+    Colors.red,
+    Colors.purple,
+    Colors.black,
+  ];
 
-  const Task({
+  Task({
     required this.name,
     Key? key,
     required this.image,
-    required this.dificuldade,
+    required this.difficulty,
   }) : super(key: key);
 
   @override
@@ -18,7 +27,10 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+  int taskLevel = 0;
+  int progressLevel = 0;
+  double progressIndicatorValue = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +40,7 @@ class _TaskState extends State<Task> {
           Container(
             height: 140,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: widget.levelColors[progressLevel],
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [
                 BoxShadow(
@@ -84,27 +96,25 @@ class _TaskState extends State<Task> {
                           ),
                         ),
                         Difficulty(
-                          level: widget.dificuldade,
+                          level: widget.difficulty,
                         ),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: SizedBox(
-                        width: 52,
-                        height: 52,
+                        width: 70,
+                        height: 60,
                         child: ElevatedButton(
                           onPressed: () {
-                            setState(() {
-                              nivel++;
-                            });
+                            calculateProgress();
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: const [
                               Icon(Icons.arrow_drop_up),
-                              Text('Up'),
+                              Text('Lvl Up'),
                             ],
                           ),
                         ),
@@ -123,12 +133,10 @@ class _TaskState extends State<Task> {
                       width: 200,
                       child: LinearProgressIndicator(
                         color: Colors.white,
-                        value: widget.dificuldade > 0
-                            ? (nivel / widget.dificuldade) / 10
-                            : 1,
+                        value: progressIndicatorValue,
                       ),
                     ),
-                    Text('Nível: $nivel',
+                    Text('Nível: $taskLevel',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -141,5 +149,44 @@ class _TaskState extends State<Task> {
         ],
       ),
     );
+  }
+
+  void calculateProgress() {
+    if (isNotMaxProgress()) {
+      taskLevel++;
+    }
+    if (isTimeToLevelUpProgress()) {
+      progressLevelUp();
+    } else {
+      updateProgress();
+    }
+  }
+
+  bool isNotMaxProgress() {
+    return progressLevel <= 6 && progressIndicatorValue < 1;
+  }
+
+  bool isTimeToLevelUpProgress() {
+    return progressIndicatorValue.compareTo(1) == 0 && progressLevel <= 5;
+  }
+
+  void progressLevelUp() {
+    setState(() {
+      progressIndicatorValue = 0;
+      taskLevel = 0;
+      progressLevel++;
+    });
+  }
+
+  void updateProgress() {
+    if (widget.difficulty <= 0) {
+      setState(() {
+        progressIndicatorValue = 1;
+      });
+    } else if (progressIndicatorValue < 1) {
+      setState(() {
+        progressIndicatorValue = (taskLevel / widget.difficulty) / 10;
+      });
+    }
   }
 }
