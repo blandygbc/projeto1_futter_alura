@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto1_futter_alura/components/task.dart';
+import 'package:tasks_flutter_alura/components/task.dart';
+import 'package:tasks_flutter_alura/generated/assets.dart';
 
 class TaskView extends StatefulWidget {
   const TaskView({Key? key}) : super(key: key);
@@ -34,27 +35,27 @@ class _TaskViewState extends State<TaskView> {
               Task(
                 name: 'Aprender Flutter',
                 difficulty: 4,
-                image: 'assets/images/dash.png',
+                image: Assets.imagesDash,
               ),
               Task(
                 name: 'Andar de Bike',
                 difficulty: 1,
-                image: 'assets/images/bike.webp',
+                image: Assets.imagesBike,
               ),
               Task(
                 name: 'Meditar',
                 difficulty: 5,
-                image: 'assets/images/meditar.jpeg',
+                image: Assets.imagesMeditar,
               ),
               Task(
                 name: 'Ler',
                 difficulty: 5,
-                image: 'assets/images/livro.jpg',
+                image: Assets.imagesLivro,
               ),
               Task(
                 name: 'Jogar',
                 difficulty: 0,
-                image: 'assets/images/jogar.jpg',
+                image: Assets.imagesJogar,
               ),
               SizedBox(height: 80),
             ],

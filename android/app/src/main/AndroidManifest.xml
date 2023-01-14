@@ -1,8 +1,8 @@
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blandygbc.projeto1_futter_alura">
+    package="com.blandygbc.tasks_flutter_alura">
    <application
-        android:label="projeto1_futter_alura"
+        android:label="tasks_flutter_alura"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto1_futter_alura/components/difficulty.dart';
+import 'package:tasks_flutter_alura/components/difficulty.dart';
 
 class Task extends StatefulWidget {
   final String name;

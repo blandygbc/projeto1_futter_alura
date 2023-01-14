@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto1_futter_alura/views/task_view.dart';
+import 'package:tasks_flutter_alura/views/form_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TaskView(),
+      home: const FormView(),
     );
   }
 }
