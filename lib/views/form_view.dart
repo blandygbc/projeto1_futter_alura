@@ -44,6 +44,7 @@ class _FormViewState extends State<FormView> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
@@ -109,6 +110,7 @@ class _FormViewState extends State<FormView> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.black26,
@@ -129,17 +131,20 @@ class _FormViewState extends State<FormView> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: const Text("Salvando a tarefa!"),
+                            content: Text("Salvando a tarefa!"),
                           ));
                         }
+                        Navigator.pop(context);
                       },
                       child: const Text('Adicionar'),
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
