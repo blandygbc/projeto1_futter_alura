@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_flutter_alura/data/task_inherited.dart';
 import 'package:tasks_flutter_alura/views/form_view.dart';
 import 'package:tasks_flutter_alura/views/task_view.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TasksView(),
+      home: TaskInherited(child: const TasksView()),
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_flutter_alura/data/task_inherited.dart';
 import 'package:tasks_flutter_alura/generated/assets.dart';
 
 class FormView extends StatefulWidget {
-  const FormView({Key? key}) : super(key: key);
+  const FormView({Key? key, required this.taskContext}) : super(key: key);
+
+  final BuildContext taskContext;
 
   @override
   State<FormView> createState() => _FormViewState();
@@ -135,6 +138,11 @@ class _FormViewState extends State<FormView> {
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
+                          TaskInherited.of(widget.taskContext)!.newTask(
+                            nameController.text,
+                            int.parse(difficultyController.text),
+                            imageController.text,
+                          );
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text("Salvando a tarefa!"),

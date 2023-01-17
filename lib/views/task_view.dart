@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_flutter_alura/components/task.dart';
+import 'package:tasks_flutter_alura/data/task_inherited.dart';
 import 'package:tasks_flutter_alura/generated/assets.dart';
 import 'package:tasks_flutter_alura/views/form_view.dart';
 
@@ -23,40 +24,13 @@ class _TasksViewState extends State<TasksView> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FormView(),
+                  builder: (formContext) => FormView(taskContext: context),
                 ));
           },
           child: const Icon(Icons.add),
         ),
         body: ListView(
-          children: [
-            Task(
-              name: 'Aprender Flutter',
-              difficulty: 4,
-              image: Assets.imagesDash,
-            ),
-            Task(
-              name: 'Andar de Bike',
-              difficulty: 1,
-              image: Assets.imagesBike,
-            ),
-            Task(
-              name: 'Meditar',
-              difficulty: 5,
-              image: Assets.imagesMeditar,
-            ),
-            Task(
-              name: 'Ler',
-              difficulty: 5,
-              image: Assets.imagesLivro,
-            ),
-            Task(
-              name: 'Jogar',
-              difficulty: 0,
-              image: Assets.imagesJogar,
-            ),
-            const SizedBox(height: 80),
-          ],
+          children: TaskInherited.of(context)!.taskList,
         ));
   }
 }
