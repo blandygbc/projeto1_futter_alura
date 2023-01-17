@@ -22,14 +22,22 @@ class Task extends StatefulWidget {
     required this.difficulty,
   }) : super(key: key);
 
+  int taskLevel = 0;
+
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int taskLevel = 0;
   int progressLevel = 0;
   double progressIndicatorValue = 0.0;
+
+  bool isAsset() {
+    if (widget.image.startsWith('http')) {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,12 +81,16 @@ class _TaskState extends State<Task> {
                       width: 100,
                       height: 100,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(
-                          widget.image,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                          borderRadius: BorderRadius.circular(8),
+                          child: isAsset()
+                              ? Image.asset(
+                                  widget.image,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  widget.image,
+                                  fit: BoxFit.cover,
+                                )),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -136,7 +148,7 @@ class _TaskState extends State<Task> {
                         value: progressIndicatorValue,
                       ),
                     ),
-                    Text('Nível: $taskLevel',
+                    Text('Nível: $widget.taskLevel',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -153,7 +165,7 @@ class _TaskState extends State<Task> {
 
   void calculateProgress() {
     if (isNotMaxProgress()) {
-      taskLevel++;
+      widget.taskLevel++;
     }
     if (isTimeToLevelUpProgress()) {
       progressLevelUp();
@@ -173,7 +185,7 @@ class _TaskState extends State<Task> {
   void progressLevelUp() {
     setState(() {
       progressIndicatorValue = 0;
-      taskLevel = 0;
+      widget.taskLevel = 0;
       progressLevel++;
     });
   }
@@ -185,7 +197,7 @@ class _TaskState extends State<Task> {
       });
     } else if (progressIndicatorValue < 1) {
       setState(() {
-        progressIndicatorValue = (taskLevel / widget.difficulty) / 10;
+        progressIndicatorValue = (widget.taskLevel / widget.difficulty) / 10;
       });
     }
   }

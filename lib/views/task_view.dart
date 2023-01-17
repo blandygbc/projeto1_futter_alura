@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasks_flutter_alura/components/task.dart';
 import 'package:tasks_flutter_alura/data/task_inherited.dart';
-import 'package:tasks_flutter_alura/generated/assets.dart';
 import 'package:tasks_flutter_alura/views/form_view.dart';
 
 class TasksView extends StatefulWidget {
@@ -30,6 +28,7 @@ class _TasksViewState extends State<TasksView> {
           child: const Icon(Icons.add),
         ),
         body: ListView(
+          padding: const EdgeInsets.only(top: 8, bottom: 80),
           children: TaskInherited.of(context)!.taskList,
         ));
   }

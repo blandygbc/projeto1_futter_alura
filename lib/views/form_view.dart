@@ -17,6 +17,20 @@ class _FormViewState extends State<FormView> {
   TextEditingController imageController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  bool isValueEmpty(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isValueNotInRange(int value) {
+    if (value > 5 || value < 1) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,7 +67,7 @@ class _FormViewState extends State<FormView> {
                           horizontal: 16.0, vertical: 8.0),
                       child: TextFormField(
                         validator: (String? value) {
-                          if (value != null && value.isEmpty) {
+                          if (isValueEmpty(value)) {
                             return 'insira o nome da tarefa';
                           }
                           return null;
@@ -72,10 +86,9 @@ class _FormViewState extends State<FormView> {
                           horizontal: 16.0, vertical: 8.0),
                       child: TextFormField(
                         validator: (String? value) {
-                          if (value!.isEmpty) {
+                          if (isValueEmpty(value)) {
                             return 'Insira o valor da dificuldade';
-                          } else if (int.parse(value) > 5 ||
-                              int.parse(value) < 1) {
+                          } else if (isValueNotInRange(int.parse(value!))) {
                             return 'Insira um valor entre 1 e 5';
                           }
                           return null;
