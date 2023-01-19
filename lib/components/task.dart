@@ -23,13 +23,12 @@ class Task extends StatefulWidget {
   }) : super(key: key);
 
   int taskLevel = 0;
-
+  int progressLevel = 0;
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int progressLevel = 0;
   double progressIndicatorValue = 0.0;
 
   bool isAsset() {
@@ -48,7 +47,7 @@ class _TaskState extends State<Task> {
           Container(
             height: 140,
             decoration: BoxDecoration(
-              color: widget.levelColors[progressLevel],
+              color: widget.levelColors[widget.progressLevel],
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [
                 BoxShadow(
@@ -148,7 +147,7 @@ class _TaskState extends State<Task> {
                         value: progressIndicatorValue,
                       ),
                     ),
-                    Text('Nível: $widget.taskLevel',
+                    Text('Nível: ${widget.taskLevel}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -175,18 +174,19 @@ class _TaskState extends State<Task> {
   }
 
   bool isNotMaxProgress() {
-    return progressLevel <= 6 && progressIndicatorValue < 1;
+    return widget.progressLevel <= 6 && progressIndicatorValue < 1;
   }
 
   bool isTimeToLevelUpProgress() {
-    return progressIndicatorValue.compareTo(1) == 0 && progressLevel <= 5;
+    return progressIndicatorValue.compareTo(1) == 0 &&
+        widget.progressLevel <= 5;
   }
 
   void progressLevelUp() {
     setState(() {
       progressIndicatorValue = 0;
       widget.taskLevel = 0;
-      progressLevel++;
+      widget.progressLevel++;
     });
   }
 
