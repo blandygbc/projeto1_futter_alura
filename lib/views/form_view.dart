@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tasks_flutter_alura/data/task_inherited.dart';
+import 'package:tasks_flutter_alura/components/task.dart';
+import 'package:tasks_flutter_alura/data/task_dao.dart';
 import 'package:tasks_flutter_alura/generated/assets.dart';
+import 'package:uuid/uuid.dart';
+
+// dash https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large
+//dartDash https://ih1.redbubble.net/image.1076687066.0716/st,small,507x507-pad,600x600,f8f8f8.jpg
 
 class FormView extends StatefulWidget {
   const FormView({Key? key, required this.taskContext}) : super(key: key);
@@ -137,7 +142,6 @@ class _FormViewState extends State<FormView> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          //https://ih1.redbubble.net/image.1076687066.0716/st,small,507x507-pad,600x600,f8f8f8.jpg
                           imageController.text,
                           fit: BoxFit.cover,
                           errorBuilder: (BuildContext context, Object ex,
@@ -151,11 +155,16 @@ class _FormViewState extends State<FormView> {
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          TaskInherited.of(widget.taskContext)!.newTask(
-                            nameController.text,
-                            int.parse(difficultyController.text),
-                            imageController.text,
-                          );
+                          TaskDao().save(Task(
+                            id: const Uuid().v4(),
+                            name: nameController.text,
+                            image: imageController.text,
+                            difficulty: int.parse(difficultyController.text),
+                            taskLevel: 0,
+                            progressLevel: 0,
+                            progressIndicatorValue: 0.0,
+                          ));
+
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text("Salvando a tarefa!"),

@@ -13,30 +13,45 @@ class TaskInherited extends InheritedWidget {
       name: 'Aprender Flutter',
       difficulty: 4,
       image: Assets.imagesDash,
+      taskLevel: 0,
+      progressLevel: 0,
+      progressIndicatorValue: 0.0,
     ),
     Task(
       id: uuid.v4(),
       name: 'Andar de Bike',
       difficulty: 2,
       image: Assets.imagesBike,
+      taskLevel: 0,
+      progressLevel: 0,
+      progressIndicatorValue: 0.0,
     ),
     Task(
       id: uuid.v4(),
       name: 'Meditar',
       difficulty: 5,
       image: Assets.imagesMeditar,
+      taskLevel: 0,
+      progressLevel: 0,
+      progressIndicatorValue: 0.0,
     ),
     Task(
       id: uuid.v4(),
       name: 'Ler',
       difficulty: 5,
       image: Assets.imagesLivro,
+      taskLevel: 0,
+      progressLevel: 0,
+      progressIndicatorValue: 0.0,
     ),
     Task(
       id: uuid.v4(),
       name: 'Jogar',
       difficulty: 1,
       image: Assets.imagesJogar,
+      taskLevel: 0,
+      progressLevel: 0,
+      progressIndicatorValue: 0.0,
     ),
   ];
 
@@ -46,6 +61,9 @@ class TaskInherited extends InheritedWidget {
       name: name,
       image: image,
       difficulty: difficulty,
+      taskLevel: 0,
+      progressLevel: 0,
+      progressIndicatorValue: 0.0,
     ));
   }
 

@@ -9,6 +9,9 @@ class TaskDao {
                                     $_name TEXT,
                                     $_difficulty INTEGER,
                                     $_image TEXT,
+                                    $_taskLevel INTEGER,
+                                    $_taskProgressLevel INTEGER,
+                                    $_taskProgressIndicatorValue REAL,
                                     PRIMARY KEY($_id)
                                   );
                                   ''';
@@ -18,8 +21,11 @@ class TaskDao {
   static const String _name = 'name';
   static const String _difficulty = 'diffiulty';
   static const String _image = 'image';
+  static const String _taskLevel = 'level';
+  static const String _taskProgressLevel = 'progress_level';
+  static const String _taskProgressIndicatorValue = 'progress_indcator_value';
 
-  save(Task task) async {
+  Future<int> save(Task task) async {
     final Database db = await getDatabase();
     List<Task> itemExists = await find(task.id);
     final taskMap = toMap(task);
@@ -68,6 +74,9 @@ class TaskDao {
         name: row[_name],
         image: row[_image],
         difficulty: row[_difficulty],
+        taskLevel: row[_taskLevel],
+        progressLevel: row[_taskProgressLevel],
+        progressIndicatorValue: row[_taskProgressIndicatorValue],
       );
       tasks.add(task);
     }
@@ -80,6 +89,9 @@ class TaskDao {
       _name: task.name,
       _image: task.image,
       _difficulty: task.difficulty,
+      _taskLevel: task.taskLevel,
+      _taskProgressLevel: task.progressLevel,
+      _taskProgressIndicatorValue: task.progressIndicatorValue,
     };
   }
 }
